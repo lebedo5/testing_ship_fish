@@ -1,25 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Home from "./screens/home";
+import './index.scss'
+import { store } from "./store";
+import { Provider } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CreateNewProduct from "./screens/create_new_product";
+import NewProductList from "./screens/new_products_list";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Provider store={store}>
+        <div className="App">
+          <div className={"gradient"} />
+          <div className={"main"}>
+            <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="create_product" element={<CreateNewProduct />} />
+              <Route path="new_product" element={<NewProductList />} />
+
+            </Routes>
+            </BrowserRouter>
+          </div>
+        </div>
+      </Provider>
   );
 }
 
