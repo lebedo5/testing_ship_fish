@@ -3,7 +3,7 @@ import { useFiltersProductMutation, useGetProductsQuery } from "../store/apiSlic
 import Search from "../components/search/search";
 import { headerBlock } from "../const/const";
 
-const NewProductList = () => {
+const ProductListInTable = () => {
 	const [search, setSearch] = useState("");
 	const { data } = useGetProductsQuery(search);
 	const [list, setList] = useState(data?.products)
@@ -26,43 +26,45 @@ const NewProductList = () => {
 				const result: any = await filtersProduct(val)
 				setList(result?.data?.products)
 				break;
+			case "id":
+				setList(newList?.filter((item: { id: string }) => item.id === val))
+				break;
 			case "title":
-				const filteringList = list?.filter((item: any) => item.title === val)
-				setList(filteringList)
+				setList(newList?.filter((item: { title: string }) => item.title === val))
 				break;
 			case "price_lower":
-				newList.sort((a: any, b: any) => {
+				newList.sort((a: { price: number }, b: { price: number }) => {
 						return	a.price - b.price
 				})
 				setList(newList)
 				break;
 			case "price_higher":
-				newList.sort((a: any, b: any) => {
+				newList.sort((a: { price: number }, b: { price: number }) => {
 					return b.price - a.price
 				})
 				setList(newList)
 				break;
 			case "rating_lower":
-				newList.sort((a: any, b: any) => {
-					return	a.price - b.price
+				newList.sort((a: { rating: number }, b: { rating: number }) => {
+					return	a.rating - b.rating
 				})
 				setList(newList)
 				break;
 			case "rating_higher":
-				newList.sort((a: any, b: any) => {
-					return b.price - a.price
+				newList.sort((a: { rating: number }, b: { rating: number }) => {
+					return b.rating - a.rating
 				})
 				setList(newList)
 				break;
 			case "stock_lower":
-				newList.sort((a: any, b: any) => {
-					return	a.price - b.price
+				newList.sort((a: { stock: number }, b: { stock: number }) => {
+					return	a.stock - b.stock
 				})
 				setList(newList)
 				break;
 			case "stock_higher":
-				newList.sort((a: any, b: any) => {
-					return b.price - a.price
+				newList.sort((a: { stock: number }, b: { stock: number }) => {
+					return b.stock - a.stock
 				})
 				setList(newList)
 				break;
@@ -76,20 +78,23 @@ const NewProductList = () => {
 	return (
 		<div>
 			<div className={"list_products"}>
+				<h1 className={"list_products-title"}>Products in Table</h1>
 				<Search search={search} setSearch={setSearch} />
 				<div className={"clear_filters_button"}>
-					<button className={"button_text"} onClick={clearList}>Clear Filters</button>
+					<button className={"button_text"} onClick={clearList}>Reset Filters</button>
 				</div>
-				{list ? <div className={"header"}>
+				{list ? <div className={"products_wrap"}>
 					{headerBlock.map(({ name, children, notClickable }, index) => {
 						return (
 							<div key={`item-${index}`}>
 								<p className={`filter_title ${notClickable && 'not_clickable_label'} label`}>
 									{name}
 								</p>
-								{children && <div style={{ flexDirection: "row", display: "flex", justifyContent: 'space-between' }}>
+								{children && <div className={"children_header_block"}>
 									{children.map(({ title, actionVal }, index) => (
-										<p key={`item-${index}`} style={{ width: "45%", textAlign: 'center', marginTop: 10 }} className={"label"} onClick={() => filtering("", actionVal)}>{title}</p>
+										<p key={`item-${index}`}
+										   className={"label children_header_block-text"}
+										   onClick={() => filtering("", actionVal)}>{title}</p>
 									))}
                 </div>}
 							</div>
@@ -98,14 +103,14 @@ const NewProductList = () => {
 					{list?.map((item : any) => {
 						return (
 							<>
-								<p className={'filter_title'}>{item?.id}</p>
+								<p onClick={() => filtering(item?.id, "id")}  className={'filter_title link'}>{item?.id}</p>
 								<p onClick={() => filtering(item?.title, "title")}  className={'filter_title link'}>{item?.title}</p>
-								<div style={{ overflow: "scroll", height: 150 }}>
+								<div className={"description_block"}>
 									<p className={'filter_title'}>{item?.description}</p>
 								</div>
 								<p className={'filter_title'}>{item?.price}</p>
-								<div style={{ display: "flex", justifyContent: "center", overflow: "hidden" }}>
-									<img src={item?.thumbnail} style={{ height: 100, }} />
+								<div className={"image_block"}>
+									<img src={item?.thumbnail} className={"img"} />
 								</div>
 								<p className={'filter_title'}>{item?.rating}</p>
 								<p className={'filter_title'}>{item?.stock}</p>
@@ -121,5 +126,5 @@ const NewProductList = () => {
 	);
 };
 
-export default NewProductList;
+export default ProductListInTable;
 

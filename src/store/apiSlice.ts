@@ -1,9 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { baseUrl } from "../const/const";
-// fetch('https://dummyjson.com/products/category/smartphones')
-// 	.then(res => res.json())
-// 	.then(console.log);
-
 export const apiSlice = createApi({
 	reducerPath: "api",
 	baseQuery: fetchBaseQuery({ baseUrl }),
@@ -48,4 +44,4 @@ export const apiSlice = createApi({
 	})
 })
 
-export const { useGetProductsQuery, useCreateNewProductMutation, useUpdateProductMutation, useDeleteProductMutation, useFiltersProductMutation } = apiSlice;
+export const { useGetProductQuery, useGetProductsQuery, useCreateNewProductMutation, useUpdateProductMutation, useDeleteProductMutation, useFiltersProductMutation } = apiSlice;

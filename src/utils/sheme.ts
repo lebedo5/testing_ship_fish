@@ -13,5 +13,5 @@ export const SignupSchema = Yup.object().shape({
 		.min(1, 'Too Short!')
 		.max(11, 'Too Long!')
 		.required('Required'),
-	yearPublication: Yup.string().required('Required'),
+	yearPublication: Yup.number().required('Required')
 });

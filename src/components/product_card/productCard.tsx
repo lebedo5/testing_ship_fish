@@ -43,7 +43,6 @@ const ProductCard = ({ item }: ProductCardProps) => {
 		setEditButton(false)
 		try {
 			updateProduct({ productId: id, updateData: productData })
-			alert("update product ok")
 		} catch (e) {
 			console.log("update product", e)
 		}
@@ -52,7 +51,6 @@ const ProductCard = ({ item }: ProductCardProps) => {
 	const deleteProd = async () => {
 		try {
 			await deleteProduct(id)
-			alert("delete product ok")
 		} catch (e) {
 			console.log('delete product', e)
 		}
@@ -71,7 +69,6 @@ const ProductCard = ({ item }: ProductCardProps) => {
 				setProductData={setProductData}
 				inputName={"title"}
 				productData={productData}
-				value={title}
 				className={"product_card-title"}
 				edit={editButton}
 			/>
@@ -80,7 +77,6 @@ const ProductCard = ({ item }: ProductCardProps) => {
 					setProductData={setProductData}
 					productData={productData}
 					inputName={"price"}
-					value={price}
 					className={"number"}
 					edit={editButton}
 				/>
@@ -90,7 +86,6 @@ const ProductCard = ({ item }: ProductCardProps) => {
 					setProductData={setProductData}
 					productData={productData}
 					inputName={"rating"}
-					value={rating}
 					className={"number rating"}
 					edit={editButton}
 				/>
@@ -99,7 +94,6 @@ const ProductCard = ({ item }: ProductCardProps) => {
 				setProductData={setProductData}
 				productData={productData}
 				inputName={"description"}
-				value={description}
 				className={"product_card-description"}
 				edit={editButton}
 				style={{ width: "100%" }}

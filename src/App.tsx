@@ -5,7 +5,7 @@ import { store } from "./store";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CreateNewProduct from "./screens/create_new_product";
-import NewProductList from "./screens/new_products_list";
+import ProductListInTable from './screens/products_in_table';
 
 function App() {
   return (
@@ -14,12 +14,11 @@ function App() {
           <div className={"gradient"} />
           <div className={"main"}>
             <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="create_product" element={<CreateNewProduct />} />
-              <Route path="new_product" element={<NewProductList />} />
-
-            </Routes>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="create_product" element={<CreateNewProduct />} />
+                <Route path="/products_table" element={<ProductListInTable />} />
+              </Routes>
             </BrowserRouter>
           </div>
         </div>

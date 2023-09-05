@@ -5,7 +5,6 @@ import { useCreateNewProductMutation } from "../store/apiSlice";
 import { useDispatch } from "react-redux";
 import { newProductSlice } from "../store/productsSlice";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 interface Values {
 	product_name: string;
 	creator: string;
@@ -18,7 +17,7 @@ const CreateNewProduct = () => {
 	const [initialValues, setInitialValues] = useState({
 		product_name: '',
 		creator: '',
-		rating: 0,
+		rating: 1,
 		yearPublication: '',
 	});
 	const [createNewProduct] = useCreateNewProductMutation()
